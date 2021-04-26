@@ -1,0 +1,23 @@
+name: First project
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Installing Node
+      uses: actions/setup-node@v2-beta
+      with:
+          node-version: 12
+          
+    - name: Installing surge
+      run: npm install --g surge
+    - name: deploying using surge
+      run: surge ./ ammad-first-project.surge.sh --token $ {{secrets.SURGE_TOKEN}}
